@@ -27,10 +27,6 @@ def index():
         {
             'author': {'username': 'Саня'},
             'body': 'Я обЬелся!'
-        },
-        {
-            'author': {'username': 'Диоген'},
-            'body': 'Живу в коробке, и не парит!'
         }
     ]
     return render_template("index.html", title='Home', posts=posts)
@@ -85,10 +81,11 @@ def user(username):
     ]
     return render_template('user.html', user=user, posts=posts)
 
+
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-    form = EditProfileForm()
+    form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
