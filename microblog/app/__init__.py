@@ -7,6 +7,7 @@ import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
 from flask_bootstrap import Bootstrap
+from flask_mail import Mail
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -14,6 +15,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
+mail = Mail(app)
 bootstrap = Bootstrap(app)
 
 if not app.debug:
@@ -23,7 +25,7 @@ if not app.debug:
             auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
         secure = None
         if app.config['MAIL_USE_TLS']:
-            secure=()
+            secure = ()
         mail_handler = SMTPHandler(
             mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
             fromaddr='no-reply@' + app.config['MAIL_SERVER'],
