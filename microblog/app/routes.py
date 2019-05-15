@@ -186,3 +186,20 @@ def unfollow(username):
     db.session.commit()
     flash('You are not following {}.'.format(username))
     return redirect(url_for('user', username=username))
+
+
+@app.route('/timetable')
+@login_required
+def timetable():
+    form = TimetableForm(current_user.username)
+    if form.validate_on_submit():
+        current_user.subject = form.subject.data
+        current_user.homework = form.homework.data
+        db.session.commit()
+        flash('Your changes have been saved.')
+        return redirect(url_for('timetable'))
+    elif request.method == 'GET':
+        form.sbuject.data = current_user.subject
+        form.homework.data = current_user.homework
+    return render_template('timetable.html', title='Расписание',
+                           form=form)

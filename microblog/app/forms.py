@@ -61,5 +61,11 @@ class EditProfileForm(FlaskForm):
 
 
 class PostForm(FlaskForm):
-    post = TextAreaField('Say something', validators=[DataRequired()])
+    post = TextAreaField('Скажите что-нибудь', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+
+class TimetableForm(FlaskForm):
+    subject = StringField('Предмет', validators=[DataRequired()])
+    homework = TextAreaField('Домашнее задание', validators=[Length(min=0, max=140)])
+    submit = SubmitField('Подтвердить')

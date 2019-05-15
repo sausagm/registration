@@ -1,7 +1,7 @@
 {% extends 'bootstrap/base.html' %}
 
 {% block title %}
-    {% if title %}{{ title }} - Микроблог{% else %} Добро пожаловать в микроблог{% endif %}
+    {% if title %}{{ title }} - БУТоблог МТУСИ {% else %} Добро пожаловать в БУТоблог МТУСИ{% endif %}
 {% endblock %}
 
 {% block navbar %}
@@ -14,12 +14,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url_for('index') }}">Микроблог</a>
+                <a class="navbar-brand" href="{{ url_for('index') }}">БУТоблог МТУСИ</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url_for('index') }}">Домой</a></li>
                     <li><a href="{{ url_for('explore') }}">Explore</a></li>
+                    <li><a href="{{ url for('timetable') }}">Расписание</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if current_user.is_anonymous %}
@@ -47,4 +48,10 @@
         {# application content needs to be provided in the app_content block #}
         {% block app_content %}{% endblock %}
     </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+    {{ moment.lang('ru') }}
 {% endblock %}
