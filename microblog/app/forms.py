@@ -68,4 +68,4 @@ class PostForm(FlaskForm):
 class TimetableForm(FlaskForm):
     subject = StringField('Предмет', validators=[DataRequired()])
     homework = TextAreaField('Домашнее задание', validators=[Length(min=0, max=140)])
-    submit = SubmitField('Подтвердить')
+    submit = SubmitField('Готово')

@@ -3,4 +3,22 @@
 
 {% block app_content %}
 <h1> Расписание группы БУТ1801 </h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Предмет</th>
+      <th>Домашнее задание</th>
+      <th>Выполнено</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>{{ form.subject.label }}</td>
+      <td>{{ form.homework.label }}</td>
+      <td>{{ form.submit() }}</td>
+    </tr>
+  </tbody>
+</table>
 {% endblock %}

@@ -20,7 +20,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url_for('index') }}">Домой</a></li>
                     <li><a href="{{ url_for('explore') }}">Explore</a></li>
-                    <li><a href="{{ url for('timetable') }}">Расписание</a></li>
+                    <li><a href="{{ url_for('timetable') }}">Расписание</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if current_user.is_anonymous %}
