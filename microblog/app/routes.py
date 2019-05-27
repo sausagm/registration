@@ -4,7 +4,7 @@ from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, \
     ResetPasswordRequestForm, ResetPasswordForm, TimetableForm
 from flask_login import login_user, logout_user, current_user, login_required
-from app.models import User, Post
+from app.models import User, Post, Timetable
 from werkzeug.urls import url_parse
 from datetime import datetime
 from app.email import send_password_reset_email
@@ -188,8 +188,17 @@ def unfollow(username):
     return redirect(url_for('user', username=username))
 
 
-@app.route('/timetable')
+@app.route('/timetable', methods=['GET', 'POST'])
 @login_required
 def timetable():
     form = TimetableForm()
+    if form.validate_on_submit():
+        Timetable.subject = form.subject.data
+        Timetable.homework = form.homework.data
+        db.session.commit()
+        flash('Your changes have been saved.')
+        return redirect(url_for('timetable'))
+    elif request.method == 'GET':
+        form.subject.data = Timetable.subject
+        form.homework.data = Timetable.homework
     return render_template('timetable.html', title='Расписание', form=form)

@@ -89,3 +89,15 @@ class Post(db.Model):
 
     def __repr_(self):
         return '<Post {}>' .format(self.body)
+
+
+class Timetable(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    subject = db.Column(db.Integer)
+    homework = db.Column(db.Text)
+    submit = db.Column(db.Integer)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return '<Timetable {}>' .format(self.homework)
