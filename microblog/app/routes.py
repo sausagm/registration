@@ -193,12 +193,12 @@ def unfollow(username):
 def timetable():
     form = TimetableForm()
     if form.validate_on_submit():
-        Timetable.subject = form.subject.data
-        Timetable.homework = form.homework.data
+        subject = Timetable(body=form.subject.data)
+        db.session.add(subject)
         db.session.commit()
-        flash('Your changes have been saved.')
-        return redirect(url_for('timetable'))
-    elif request.method == 'GET':
-        form.subject.data = Timetable.subject
-        form.homework.data = Timetable.homework
+        flash('Subject is changed')
+        homework = Timetable(body=form.homework.data)
+        db.session.add(homework)
+        db.session.commit()
+        flash('Homework is changed')
     return render_template('timetable.html', title='Расписание', form=form)
